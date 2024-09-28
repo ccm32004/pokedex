@@ -1,8 +1,8 @@
-const { gql } = require('apollo-server-express');
+const { buildSchema } = require('graphql');
 
-const typeDefs = gql`
+const schema = buildSchema(`
   type Name {
-    english: String!
+    english: String
     japanese: String
     chinese: String
     french: String
@@ -12,22 +12,22 @@ const typeDefs = gql`
     HP: Int
     Attack: Int
     Defense: Int
-    SpAttack: Int
-    SpDefense: Int
+    Sp_Attack: Int
+    Sp_Defense: Int
     Speed: Int
   }
 
   type Pokemon {
-    id: ID!
-    name: Name!
-    type: [String]!
-    base: Base!
+    id: Int
+    name: Name
+    type: [String]
+    base: Base
   }
 
   type Query {
+    pokemon(id: Int!): Pokemon
     pokemons: [Pokemon]
-    pokemon(id: ID!): Pokemon
   }
-`;
+`);
 
-module.exports = typeDefs;
+module.exports = schema;
