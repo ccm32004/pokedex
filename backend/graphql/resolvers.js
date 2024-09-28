@@ -1,18 +1,25 @@
 const fs = require('fs');
+const path = require('path');
 
-const getPokemonData = () => {
-  const data = fs.readFileSync('./data/pokedex.json', 'utf8');
-  return JSON.parse(data);
-};
+// Read data from the JSON file
+const pokedexData = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/pokedex.json'), 'utf-8'));
 
 const resolvers = {
-//these are in essence, all the possible queries that can be made to the graphql server
-  getPokemonById: ({ id }) => {
-    const pokedex = getPokemonData();
-    return pokedex.find(pokemon => pokemon.id === id);
+  Query: {
+    pokemons: () => pokedexData,  // Return all Pokémon
+    pokemon: (parent, args) => pokedexData.find(pokemon => pokemon.id === parseInt(args.id)) // Return specific Pokémon by ID
   },
-  getAllPokemon: () => {
-    return getPokemonData();
+  Pokemon: {
+    base: (parent) => {
+      return {
+        HP: parent.base.HP,
+        Attack: parent.base.Attack,
+        Defense: parent.base.Defense,
+        SpAttack: parent.base["Sp. Attack"],
+        SpDefense: parent.base["Sp. Defense"],
+        Speed: parent.base.Speed
+      };
+    }
   }
 };
 
