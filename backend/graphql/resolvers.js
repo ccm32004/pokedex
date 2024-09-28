@@ -1,26 +1,19 @@
+// graphql/resolvers.js
 const fs = require('fs');
-const path = require('path');
 
-// Read data from the JSON file
-const pokedexData = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/pokedex.json'), 'utf-8'));
+let pokemonData;
+try {
+  pokemonData = JSON.parse(fs.readFileSync('./data/pokedex.json', 'utf8'));
+} catch (error) {
+  console.error('Error reading pokemon data:', error);
+}
 
 const resolvers = {
-  Query: {
-    pokemons: () => pokedexData,  // Return all Pokémon
-    pokemon: (parent, args) => pokedexData.find(pokemon => pokemon.id === parseInt(args.id)) // Return specific Pokémon by ID
+  pokemon: ({ id }) => pokemonData.find(pokemon => pokemon.id === id),
+  pokemons: () => {
+    console.log('Fetching all pokemons'); // Add this line to see if the resolver is hit
+    return pokemonData;
   },
-  Pokemon: {
-    base: (parent) => {
-      return {
-        HP: parent.base.HP,
-        Attack: parent.base.Attack,
-        Defense: parent.base.Defense,
-        SpAttack: parent.base["Sp. Attack"],
-        SpDefense: parent.base["Sp. Defense"],
-        Speed: parent.base.Speed
-      };
-    }
-  }
 };
 
 module.exports = resolvers;
