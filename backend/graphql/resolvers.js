@@ -10,10 +10,15 @@ try {
 
 const resolvers = {
   pokemon: ({ id }) => pokemonData.find(pokemon => pokemon.id === id),
-  pokemons: () => {
-    console.log('Fetching all pokemons'); // Add this line to see if the resolver is hit
-    return pokemonData;
-  },
+  pokemons: () => 
+    pokemonData.map(pokemon => ({
+      ...pokemon,
+      base: {
+        ...pokemon.base,
+        Sp_Attack: pokemon.base['Sp. Attack'],  // Map from JSON to GraphQL
+        Sp_Defense: pokemon.base['Sp. Defense'],  // Map from JSON to GraphQL
+      },
+    })),
 };
 
 module.exports = resolvers;

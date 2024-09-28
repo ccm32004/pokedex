@@ -26,11 +26,12 @@
 
 import React from 'react';
 import PokemonList from './components/PokemonList'; // Import the PokemonList component
+import PokemonTable from './components/PokemonTable';
 
 const App = () => (
   <div>
-    <h1>Pokémon List</h1>
-    <PokemonList /> {/* Use the PokemonList component here */}
+    <h1>Pokémon Table</h1>
+    <PokemonTable />{/* Use the PokemonList component here */}
   </div>
 );
 

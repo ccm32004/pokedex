@@ -1,6 +1,7 @@
 // src/PokemonList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { GET_ALL_POKEMON } from './queries'; // Import the query
 
 const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -11,16 +12,7 @@ const PokemonList = () => {
     const fetchPokemons = async () => {
       try {
         const response = await axios.post('http://localhost:4000/graphql', {
-          query: `
-            {
-              pokemons {
-                id
-                name {
-                  english
-                }
-              }
-            }
-          `,
+          query: GET_ALL_POKEMON, // Use the imported query
         });
 
         setPokemons(response.data.data.pokemons);
