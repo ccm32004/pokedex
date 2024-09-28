@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
 import _ from 'lodash';
 import { GET_ALL_POKEMON } from '../graphql/queries';
 
 const PokemonTable = () => {
-  const { loading, error, data } = useQuery(GET_ALL_POKEMONS);
+  const { loading, error, data } = useQuery(GET_ALL_POKEMON);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' });
   const [currentPage, setCurrentPage] = useState(1);
