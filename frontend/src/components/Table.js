@@ -83,6 +83,18 @@ const PokemonTable = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const columns = [
+    { id: 'id', label: 'ID' },
+    { id: 'name.english', label: 'English Name' },
+    { id: 'type', label: 'Types', sortable: false },
+    { id: 'base.HP', label: 'HP' },
+    { id: 'base.Attack', label: 'Attack' },
+    { id: 'base.Defense', label: 'Defense' },
+    { id: 'base.Sp_Attack', label: 'Special Attack' },
+    { id: 'base.Sp_Defense', label: 'Special Defense' },
+    { id: 'base.Speed', label: 'Speed' },
+  ];
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -90,79 +102,27 @@ const PokemonTable = () => {
           <Table sx={{ minWidth: 750 }} aria-label="pokemon table">
             <TableHead>
               <TableRow>
-                <TableCell sortDirection={orderBy === 'id' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'id'}
-                    direction={orderBy === 'id' ? order : 'asc'}
-                    onClick={() => handleRequestSort('id')}
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    sortDirection={orderBy === column.id ? order : false}
+                    sx={{
+                      backgroundColor: orderBy === column.id ? 'primary.light' : 'inherit', // Highlight background
+                    }}
                   >
-                    ID
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'name.english' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'name.english'}
-                    direction={orderBy === 'name.english' ? order : 'asc'}
-                    onClick={() => handleRequestSort('name.english')}
-                  >
-                    English Name
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell>Types</TableCell>
-                <TableCell sortDirection={orderBy === 'base.HP' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.HP'}
-                    direction={orderBy === 'base.HP' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.HP')}
-                  >
-                    HP
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'base.Attack' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.Attack'}
-                    direction={orderBy === 'base.Attack' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.Attack')}
-                  >
-                    Attack
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'base.Defense' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.Defense'}
-                    direction={orderBy === 'base.Defense' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.Defense')}
-                  >
-                    Defense
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'base.Sp_Attack' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.Sp_Attack'}
-                    direction={orderBy === 'base.Sp_Attack' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.Sp_Attack')}
-                  >
-                    Special Attack
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'base.Sp_Defense' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.Sp_Defense'}
-                    direction={orderBy === 'base.Sp_Defense' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.Sp_Defense')}
-                  >
-                    Special Defense
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell sortDirection={orderBy === 'base.Speed' ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === 'base.Speed'}
-                    direction={orderBy === 'base.Speed' ? order : 'asc'}
-                    onClick={() => handleRequestSort('base.Speed')}
-                  >
-                    Speed
-                  </TableSortLabel>
-                </TableCell>
+                    <TableSortLabel
+                      active={orderBy === column.id}
+                      direction={orderBy === column.id ? order : 'asc'}
+                      onClick={() => column.sortable !== false && handleRequestSort(column.id)}
+                      sx={{
+                        color: orderBy === column.id ? 'primary.main' : 'inherit',
+                        fontWeight: orderBy === column.id ? 'bold' : 'normal', // Bold active label
+                      }}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
