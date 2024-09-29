@@ -26,7 +26,8 @@
 
 import React from 'react';
 import PokemonList from './components/PokemonList'; // Import the PokemonList component
-import PokemonTable from './components/PokemonTable';
+//import PokemonTable from './components/PokemonTable';
+import PokemonTable from './components/Table';
 
 const App = () => (
   <div>
