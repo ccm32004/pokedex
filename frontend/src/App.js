@@ -22,19 +22,45 @@
 //   );
 // }
 
+//export default App;
+
+// import React from 'react';
+// //import PokemonList from './components/PokemonList'; // Import the PokemonList component
+// //import PokemonTable from './components/PokemonTable';
+// import PokemonTable from './components/Table';
+
+// const App = () => (
+//   <div>
+//     <h1>Pokémon Table</h1>
+//     <PokemonTable />{/* Use the PokemonList component here */}
+//   </div>
+// );
+
 // export default App;
 
 import React from 'react';
-import PokemonList from './components/PokemonList'; // Import the PokemonList component
-//import PokemonTable from './components/PokemonTable';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PokemonTable from './components/Table';
+import PokemonDetail from './components/PokemonDetail';
 
-const App = () => (
-  <div>
-    <h1>Pokémon Table</h1>
-    <PokemonTable />{/* Use the PokemonList component here */}
-  </div>
-);
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<PokemonTable />} />
+        <Route path="/pokemon/:id" element={<PokemonDetail />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
+
+{/* <TableCell>
+                    <Router>
+                    <Link to={`/pokemon/${row.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {row.name.english}
+                    </Link>
+                    </Router>
+                  </TableCell> */}
 

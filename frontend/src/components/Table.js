@@ -11,7 +11,13 @@ import {
   TableSortLabel,
   TablePagination,
   Paper,
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
 } from '@mui/material';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { GET_ALL_POKEMON } from './queries';
 
 const PokemonTable = () => {
@@ -22,6 +28,8 @@ const PokemonTable = () => {
   const [orderBy, setOrderBy] = useState('id');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('');
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -52,8 +60,24 @@ const PokemonTable = () => {
     return keys.reduce((obj, key) => (obj ? obj[key] : undefined), row);
   };
 
+  const uniqueTypes = useMemo(() => {
+    const typesSet = new Set();
+    data.forEach(pokemon => {
+      pokemon.type.forEach(type => typesSet.add(type));
+    });
+    return Array.from(typesSet);
+  }, [data]);
+
+  const filteredData = useMemo(() => {
+    return data.filter((pokemon) => {
+      const matchesName = pokemon.name.english.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesType = selectedType ? pokemon.type.includes(selectedType) : true;
+      return matchesName && matchesType;
+    });
+  }, [data, searchTerm, selectedType]);
+
   const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => {
+    return [...filteredData].sort((a, b) => {
       const valueA = getValue(a, orderBy);
       const valueB = getValue(b, orderBy);
 
@@ -65,7 +89,7 @@ const PokemonTable = () => {
       }
       return 0;
     });
-  }, [data, order, orderBy]);
+  }, [filteredData, order, orderBy]);
 
   const visibleRows = useMemo(() => {
     return sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
@@ -97,6 +121,33 @@ const PokemonTable = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <TextField
+          label="Search by Name"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{ mr: 2 }}
+        />
+        <FormControl variant="outlined" sx={{ minWidth: 120, mr: 2 }}>
+          <InputLabel id="type-select-label">Type</InputLabel>
+          <Select
+            labelId="type-select-label"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            label="Type"
+          >
+            <MenuItem value="">
+              <em>All</em>
+            </MenuItem>
+            {uniqueTypes.map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-label="pokemon table">
@@ -107,7 +158,7 @@ const PokemonTable = () => {
                     key={column.id}
                     sortDirection={orderBy === column.id ? order : false}
                     sx={{
-                      backgroundColor: orderBy === column.id ? 'primary.light' : 'inherit', // Highlight background
+                      backgroundColor: orderBy === column.id ? 'primary.light' : 'inherit',
                     }}
                   >
                     <TableSortLabel
@@ -116,7 +167,7 @@ const PokemonTable = () => {
                       onClick={() => column.sortable !== false && handleRequestSort(column.id)}
                       sx={{
                         color: orderBy === column.id ? 'primary.main' : 'inherit',
-                        fontWeight: orderBy === column.id ? 'bold' : 'normal', // Bold active label
+                        fontWeight: orderBy === column.id ? 'bold' : 'normal',
                       }}
                     >
                       {column.label}
@@ -127,9 +178,16 @@ const PokemonTable = () => {
             </TableHead>
             <TableBody>
               {visibleRows.map(row => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  sx={{ '&:hover': { backgroundColor: 'grey.200', cursor: 'pointer' } }} // Hover effect
+                >
                   <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.name.english}</TableCell>
+                  <TableCell>
+                    <Link to={`/pokemon/${row.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {row.name.english}
+                    </Link>
+                  </TableCell> 
                   <TableCell>{row.type.join(', ')}</TableCell>
                   <TableCell>{row.base.HP}</TableCell>
                   <TableCell>{row.base.Attack}</TableCell>
