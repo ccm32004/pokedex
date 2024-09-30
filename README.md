@@ -3,3 +3,22 @@ Pokedex App. React frontend, Node.js backend with Graph QL.
 Functionalities:
 - search, filtering, can sort by name, hp, defense, special attack, etc.
 - can go to detail page for additional details on pokemon
+
+
+To run,
+
+backend:
+- navigate to cd backend
+- run 'npm install'
+- run 'node server.js'
+
+front end
+- navigate to cd frontend
+- run 'npm install'
+- run 'npm start'
+
+Pictures of App: 
+
+<img width="721" alt="Screenshot 2024-09-30 at 1 52 02 PM" src="https://github.com/user-attachments/assets/b285df68-555f-4de4-b110-754ceb8dab1a">
+
+<img width="1425" alt="Screenshot 2024-09-30 at 1 52 27 PM" src="https://github.com/user-attachments/assets/f5674c6e-18fb-4c31-8e23-bcf4b7783c02">
