@@ -121,21 +121,23 @@ const PokemonTable = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: "row", alignItems: 'center', mb: 2, marginLeft: '15px', marginTop: "20px"}}>
         <TextField
           label="Search by Name"
           variant="outlined"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{ mr: 2 }}
+          sx={{ mr: 2}}
+          size='small'
         />
         <FormControl variant="outlined" sx={{ minWidth: 120, mr: 2 }}>
-          <InputLabel id="type-select-label">Type</InputLabel>
+          <InputLabel id="type-select-label" size='small'>Type</InputLabel>
           <Select
             labelId="type-select-label"
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
             label="Type"
+            size='small'
           >
             <MenuItem value="">
               <em>All</em>
@@ -180,14 +182,30 @@ const PokemonTable = () => {
               {visibleRows.map(row => (
                 <TableRow
                   key={row.id}
-                  sx={{ '&:hover': { backgroundColor: 'grey.200', cursor: 'pointer' } }} // Hover effect
+                  sx={{ '&:hover': { backgroundColor: 'grey.200', cursor: 'pointer', padding: '10px' } }} // Hover effect
                 >
-                  <TableCell>{row.id}</TableCell>
+                   <TableCell size='small'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <img 
+                        src={`/sprites/${String(row.id).padStart(3, '0')}MS.png`} 
+                        alt={`Pokémon ${row.id}`} 
+                        style={{ width: '50px', height: '50px', borderRadius: '8px', marginRight: '8px' }} 
+                      />
+                      {row.id}
+                    </div>
+                  </TableCell>
                   <TableCell>
-                    <Link to={`/pokemon/${row.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Link
+                        to={`/pokemon/${row.id}`}
+                        style={{
+                            textDecoration: 'underline',
+                            color: '#007bff', // Bootstrap primary color or your preferred link color
+                            cursor: 'pointer'
+                        }}
+                    >
                         {row.name.english}
                     </Link>
-                  </TableCell> 
+                  </TableCell>
                   <TableCell>{row.type.join(', ')}</TableCell>
                   <TableCell>{row.base.HP}</TableCell>
                   <TableCell>{row.base.Attack}</TableCell>
