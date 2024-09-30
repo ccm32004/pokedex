@@ -1,44 +1,44 @@
 /* PokemonTable.css */
 
 .pokemon-table-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .filter-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 16px; /* Adjust as needed */
-    margin-left: 15px;
-    margin-top: 20px;
-  }
-  
-  .link {
-    text-decoration: underline;
-    color: #007bff;
-    cursor: pointer;
-  }
-  
-  .table-row-hover {
-    cursor: pointer;
-  }
-  
-  .table-row-hover:hover {
-    background-color: rgba(200, 200, 200, 0.5);
-  }
-  
-  .pokemon-image-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .pokemon-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    margin-right: 8px;
-  }
-  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+  /* Adjust as needed */
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.link {
+  text-decoration: underline;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.table-row-hover {
+  cursor: pointer;
+}
+
+.table-row-hover:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.pokemon-image-container {
+  display: flex;
+  align-items: center;
+}
+
+.pokemon-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  margin-right: 8px;
+}

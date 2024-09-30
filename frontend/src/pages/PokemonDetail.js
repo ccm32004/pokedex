@@ -52,20 +52,13 @@ const PokemonDetail = () => {
   return (
     <div className="container">
       {/* Pokémon Name */}
-      <h1 className="pokemon-name">
-        {pokemon.name.english}
-      </h1>
+      <h1 className="pokemon-name">{pokemon.name.english}</h1>
 
       {/* Row for Image, Other Languages, and Base Stats */}
       <div className="details-row">
-        
         {/* Left Column - Pokémon Image */}
         <div className="image-column">
-          <img
-            src={imageUrl}
-            alt={`Pokémon ID ${id}`}
-            className="image"
-          />
+          <img src={imageUrl} alt={`Pokémon ID ${id}`} className="image" />
         </div>
 
         {/* Middle Column - Other Languages and Types */}
@@ -102,7 +95,7 @@ const PokemonDetail = () => {
                 {Object.entries(pokemon.base).map(([stat, value]) => (
                   <TableRow key={stat}>
                     <TableCell component="th" scope="row">
-                      {stat.replace(/_/g, ' ')}
+                      {stat.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell align="right">{value}</TableCell>
                   </TableRow>
