@@ -1,0 +1,68 @@
+/* PokemonDetail.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.pokemon-name {
+  font-size: 3.875rem;
+  line-height: 2.25rem;
+  text-align: left;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.image-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  border-radius: 16px;
+  max-width: 100%;
+  height: auto;
+  background: lightgray;
+  padding: 2rem;
+}
+
+.languages-column {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.base-stats-column {
+  flex: 1;
+}
+
+.base-stats-title {
+  margin-top: 20px;
+}
+
+.lang {
+    padding: 0;
+    margin-left: 22px;
+  } 
+  
+.lang li {
+    font-size: 1.5rem; 
+    line-height: 1.5em;  
+}
+
+.button-type {
+  pointer-events: none;
+  background-color: #1976d2;
+  color: white;
+}
+
+.button-type:hover {
+  background-color: #1976d2;
+}
