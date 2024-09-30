@@ -19,6 +19,6 @@ front end
 
 Pictures of App: 
 
-<img width="721" alt="Screenshot 2024-09-30 at 1 52 02 PM" src="https://github.com/user-attachments/assets/b285df68-555f-4de4-b110-754ceb8dab1a">
+<img width="721" alt="Screenshot 2024-09-30 at 2 02 08 PM" src="https://github.com/user-attachments/assets/87816688-203c-4bfb-b8f0-3b19d673b5cc">
 
 <img width="1425" alt="Screenshot 2024-09-30 at 1 52 27 PM" src="https://github.com/user-attachments/assets/f5674c6e-18fb-4c31-8e23-bcf4b7783c02">
